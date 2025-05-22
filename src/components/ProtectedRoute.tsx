@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -13,6 +13,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   requireAdmin = false 
 }) => {
   const { user, isAuthenticated, isLoading } = useAuth();
+
+  // Debugging log
+  useEffect(() => {
+    console.log("Protected route:", { user, isAuthenticated, isLoading, requireAdmin });
+  }, [user, isAuthenticated, isLoading, requireAdmin]);
 
   if (isLoading) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;

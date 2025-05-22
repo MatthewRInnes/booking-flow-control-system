@@ -5,56 +5,37 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Here we would normally connect to an authentication API
-      // For now, we'll just simulate a successful login
-      console.log("Login attempt with:", { email, password });
+      await login(email, password);
       
-      // Simulating authentication
-      if (email === "admin@example.com" && password === "password") {
-        localStorage.setItem("user", JSON.stringify({ 
-          email, 
-          role: "admin",
-          name: "Admin User" 
-        }));
-        toast({
-          title: "Login successful",
-          description: "Welcome back, Admin!",
-        });
+      toast({
+        title: "Login successful",
+        description: "You have been logged in successfully.",
+      });
+      
+      // Redirect based on email (simplified role check for now)
+      if (email === "admin@example.com") {
         navigate("/admin");
-      } else if (email && password) {
-        localStorage.setItem("user", JSON.stringify({ 
-          email, 
-          role: "user",
-          name: "Regular User" 
-        }));
-        toast({
-          title: "Login successful",
-          description: "You have been logged in successfully.",
-        });
-        navigate("/dashboard");
       } else {
-        toast({
-          title: "Login failed",
-          description: "Please check your credentials and try again.",
-          variant: "destructive",
-        });
+        navigate("/dashboard");
       }
     } catch (error) {
       toast({
         title: "Login failed",
-        description: "An error occurred during login.",
+        description: "Please check your credentials and try again.",
         variant: "destructive",
       });
       console.error("Login error:", error);
