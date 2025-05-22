@@ -1,6 +1,10 @@
-import React from "react";
+
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BookingManagement from "@/components/admin/BookingManagement";
+import AvailabilityCalendar from "@/components/admin/AvailabilityCalendar";
 
 const Admin = () => {
   return (
@@ -12,7 +16,7 @@ const Admin = () => {
           <p className="text-gray-600">Manage bookings, users and system settings</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader>
               <CardTitle>Total Bookings</CardTitle>
@@ -44,7 +48,18 @@ const Admin = () => {
           </Card>
         </div>
         
-        {/* Add more admin functionality here */}
+        <Tabs defaultValue="bookings" className="w-full">
+          <TabsList className="mb-4">
+            <TabsTrigger value="bookings">Manage Bookings</TabsTrigger>
+            <TabsTrigger value="availability">Set Availability</TabsTrigger>
+          </TabsList>
+          <TabsContent value="bookings">
+            <BookingManagement />
+          </TabsContent>
+          <TabsContent value="availability">
+            <AvailabilityCalendar />
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );
