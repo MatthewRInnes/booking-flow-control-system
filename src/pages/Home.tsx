@@ -2,116 +2,103 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import Navbar from "@/components/Navbar";
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header Section */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">BookingSys</h1>
-          <div className="flex gap-4">
-            <Button variant="outline" asChild>
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/register">Register</Link>
-            </Button>
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      
+      <main>
+        {/* Hero section */}
+        <div className="relative px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl py-20">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                Book Your Services With Ease
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                Our booking system makes it simple to reserve rooms, rent bikes, 
+                or schedule activities. Get started today!
+              </p>
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <Button asChild size="lg">
+                  <Link to="/register">Get started</Link>
+                </Button>
+                <Button variant="outline" asChild size="lg">
+                  <Link to="/login">Sign in</Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
-      </header>
 
-      {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-4">Simplified Booking System</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Streamline your booking process with our easy-to-use platform. Perfect for services, rentals, and appointments.
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link to="/login">Get Started</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="bg-transparent hover:bg-blue-700 text-white border-white">
-              Learn More
-            </Button>
+        {/* Features section */}
+        <div className="bg-gray-50 py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl lg:text-center">
+              <h2 className="text-base font-semibold leading-7 text-primary">Book Faster</h2>
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Everything you need to manage your bookings
+              </p>
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                Our platform provides a seamless booking experience for both users and administrators.
+              </p>
+            </div>
+            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+              <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+                {[
+                  {
+                    title: "Easy Reservations",
+                    description: "Quickly book services with just a few clicks. Select dates, times, and service types easily."
+                  },
+                  {
+                    title: "Manage Your Bookings",
+                    description: "View, modify, or cancel your bookings through an intuitive dashboard interface."
+                  },
+                  {
+                    title: "Instant Confirmations",
+                    description: "Receive immediate confirmation once your booking is approved."
+                  },
+                  {
+                    title: "Secure Authentication",
+                    description: "Your account information and booking details are kept secure."
+                  }
+                ].map((feature, index) => (
+                  <div key={index} className="relative pl-16">
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
+                      <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold leading-7 text-gray-900">{feature.title}</h3>
+                    <p className="mt-2 text-base leading-7 text-gray-600">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-2">Easy Booking</h3>
-                <p>Book services with just a few clicks. Our intuitive interface makes scheduling a breeze.</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-2">Manage Appointments</h3>
-                <p>View, edit, or cancel your bookings at any time from your personalized dashboard.</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-2">Instant Confirmation</h3>
-                <p>Receive immediate confirmation for your bookings with all the details you need.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-          <div className="flex flex-col md:flex-row justify-between gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
-              <h3 className="text-xl font-bold mb-2">Create an Account</h3>
-              <p className="text-gray-600">Register to access our booking platform.</p>
+      </main>
+      
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between">
+            <div>
+              <h2 className="text-2xl font-bold">BookingApp</h2>
+              <p className="mt-2 text-gray-400">Making reservations simple.</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
-              <h3 className="text-xl font-bold mb-2">Choose a Service</h3>
-              <p className="text-gray-600">Select from our range of available services.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
-              <h3 className="text-xl font-bold mb-2">Pick a Time</h3>
-              <p className="text-gray-600">Select a date and time that works for you.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
-              <h3 className="text-xl font-bold mb-2">Confirm Booking</h3>
-              <p className="text-gray-600">Complete your booking and receive confirmation.</p>
+            <div className="mt-8 md:mt-0">
+              <h3 className="text-lg font-semibold">Quick Links</h3>
+              <div className="mt-4 space-y-2">
+                <Link to="/" className="block text-gray-400 hover:text-white">Home</Link>
+                <Link to="/login" className="block text-gray-400 hover:text-white">Login</Link>
+                <Link to="/register" className="block text-gray-400 hover:text-white">Register</Link>
+              </div>
             </div>
           </div>
-          <div className="text-center mt-12">
-            <Button size="lg" asChild>
-              <Link to="/register">Sign Up Now</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>© 2025 BookingSys. All rights reserved.</p>
-            <div className="flex gap-4 mt-4 md:mt-0">
-              <Link to="/about" className="hover:underline">About</Link>
-              <Link to="/contact" className="hover:underline">Contact</Link>
-              <Link to="/terms" className="hover:underline">Terms</Link>
-              <Link to="/privacy" className="hover:underline">Privacy</Link>
-            </div>
+          <div className="mt-12 border-t border-gray-800 pt-8 text-center text-gray-400">
+            <p>&copy; {new Date().getFullYear()} BookingApp. All rights reserved.</p>
           </div>
         </div>
       </footer>

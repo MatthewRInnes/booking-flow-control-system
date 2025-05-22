@@ -4,22 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import BookingForm from "@/components/BookingForm";
+import Navbar from "@/components/Navbar";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Dashboard = () => {
-  const [user, setUser] = useState<any>(null);
   const [bookings, setBookings] = useState<any[]>([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
-    // Check if the user is logged in
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      navigate("/login");
-      return;
-    }
-
-    setUser(JSON.parse(storedUser));
-    
     // Load mock bookings data
     setBookings([
       {
@@ -37,27 +30,19 @@ const Dashboard = () => {
         status: "pending"
       }
     ]);
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  }, []);
 
   if (!user) return null;
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Booking Dashboard</h1>
-          <div className="flex items-center gap-4">
-            <span>Welcome, {user.name}</span>
-            <Button variant="outline" onClick={handleLogout}>Logout</Button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Booking Dashboard</h1>
+          <p className="text-gray-600">Manage your bookings and create new ones</p>
+        </div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <Card>
