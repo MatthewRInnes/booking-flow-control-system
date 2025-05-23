@@ -18,7 +18,6 @@ const AvailabilityCalendar = () => {
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return;
     
-    // Check if the date is already in availableDates
     const dateExists = availableDates.some(
       availableDate => 
         availableDate.getFullYear() === date.getFullYear() &&
@@ -26,7 +25,6 @@ const AvailabilityCalendar = () => {
         availableDate.getDate() === date.getDate()
     );
 
-    // If it exists, remove it; otherwise, add it
     if (dateExists) {
       setAvailableDates(availableDates.filter(
         availableDate => 
@@ -49,36 +47,18 @@ const AvailabilityCalendar = () => {
   };
 
   const saveAvailability = () => {
-    // Here you would normally save this to your backend
     console.log("Available dates to be saved:", availableDates);
     toast.success("Availability updated successfully");
   };
 
-  // Custom day renderer to show available dates
-  const renderDay = (day: Date, selected: boolean) => {
-    const isAvailable = isDateAvailable(day);
-    
-    return (
-      <div
-        className={`h-9 w-9 p-0 font-normal flex items-center justify-center rounded-md ${
-          isAvailable
-            ? "bg-green-100 text-green-900 hover:bg-green-200"
-            : "hover:bg-gray-100"
-        }`}
-      >
-        {day.getDate()}
-      </div>
-    );
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Set Available Dates</CardTitle>
-          <CardDescription>Click on dates to mark them as available or unavailable</CardDescription>
+      <Card className="rounded-2xl shadow-lg border-2">
+        <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-2xl">
+          <CardTitle className="text-xl text-blue-800">Set Available Dates</CardTitle>
+          <CardDescription className="text-blue-600">Click on dates to mark them as available or unavailable</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="flex justify-center">
             <Calendar
               mode="single"
@@ -88,33 +68,35 @@ const AvailabilityCalendar = () => {
                 available: availableDates
               }}
               modifiersClassNames={{
-                available: "bg-green-100 text-green-900 hover:bg-green-200"
+                available: "bg-green-100 text-green-900 hover:bg-green-200 rounded-full"
               }}
               fromDate={today}
-              className="p-3"
+              className="p-3 rounded-xl border-2"
             />
           </div>
-          <div className="mt-4 flex justify-end">
-            <Button onClick={saveAvailability}>Save Availability</Button>
+          <div className="mt-6 flex justify-end">
+            <Button onClick={saveAvailability} size="lg" className="rounded-full px-8">
+              Save Availability
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Instructions</CardTitle>
-          <CardDescription>How to use the availability calendar</CardDescription>
+      <Card className="rounded-2xl shadow-lg border-2">
+        <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-t-2xl">
+          <CardTitle className="text-xl text-green-800">Instructions</CardTitle>
+          <CardDescription className="text-green-600">How to use the availability calendar</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ul className="list-disc pl-5 space-y-2">
+        <CardContent className="p-6">
+          <ul className="list-disc pl-5 space-y-3 text-gray-700">
             <li>Click on a date to mark it as available (green) or unavailable (white)</li>
             <li>Customers will only be able to book on available dates</li>
             <li>Past dates cannot be selected</li>
             <li>Don't forget to click "Save Availability" after making changes</li>
           </ul>
-          <div className="mt-6 p-3 bg-blue-50 rounded-md text-blue-800">
-            <p className="font-medium">Pro Tip</p>
-            <p className="text-sm mt-1">You can set specific time slots for each available date by going to the "Advanced Settings" section in your account settings.</p>
+          <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-400">
+            <p className="font-semibold text-blue-800">💡 Pro Tip</p>
+            <p className="text-sm mt-1 text-blue-700">You can set specific time slots for each available date by going to the "Advanced Settings" section in your account settings.</p>
           </div>
         </CardContent>
       </Card>
